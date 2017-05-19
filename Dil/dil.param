@@ -1,0 +1,94 @@
+// global
+filename: dil16.lsp
+window: yes
+struts: no
+number of devices: 16
+device spacing: 320
+window length: 1800
+window width: 5000
+window fillet radius: 20
+tiling gap: 1
+
+// grooves
+back vee groove: yes
+vee groove width: 149.17
+vee groove bulge: 0
+vee groove length: [2235, 3500]
+fda length: 300
+length of device past window: -415
+fine exposure length: [600, 600]
+safety rail width: 5
+
+hole lattice constant: 3
+number of hole rows: 1
+hole radius: 0.5
+hole recess: 330
+
+// coupler parameters
+nominal width: 0.123 + 0.002*(xx-8)*(mod(xx,2)==0)
+tether center width: 0.200
+prelength: 2
+postlength: 2
+fillet radius: 1
+tcc: yes
+hole radius: 0.113
+tcc radius: 0.300
+
+// single nanobeam parameters
+length: 199
+start width: inherit
+end width: 0.370
+function: @(w0,wf,y) w0 + (wf - w0) .* y.^3;
+number of points: 121
+
+// angled node array parameters
+start width: inherit
+end width: 0.525
+taper length: 10
+number of tethers: 16
+blank length: 1
+width at tethering: 1.125
+tether center width: 0.143
+lattice constant: 0.220
+ext. lattice constant: 0.320
+tether displacement: -(7/0.330)*(0.525)
+fix previous line to end width
+
+// cooled single nanobeam parameters
+start width: inherit
+end width: inherit
+start length: 5
+stop length: 5
+tether displacement: 0
+spacing: 150
+length: 770
+spring amplitude: 0
+; these springs didn't seem to matter very much
+
+// photonic crystal
+type: double beam
+inverse crystal: yes
+>> y junction
+start width: inherit
+end width: 0.280
+gap: 0.250
+; this should match the phc section
+inverse y: yes
+taper length: 30
+split length: 15
+
+>> double nanobeam
+length: 0.5
+
+>> crystal
+lattice constant: 0.370
+amplitude: 0.127 + mod(xx-1,4) * 0.005;
+width: 0.289 + fix((xx-1)/4) * 0.005;
+number taper: 15
+number: 150
+new taper: no
+
+// scan 
+scanned parameter: xx
+start value: 1
+end value: 16
